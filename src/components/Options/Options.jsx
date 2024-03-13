@@ -1,11 +1,10 @@
-const Options = ({typeOptions}) => {
+const Options = ({ handleLogOption }) => {
   return (
     <div>
-      <button onClick={() => handleLogOptions("Good")}>Good</button>
-      <button onClick={() => handleLogOptions("Neutral")}>Neutral</button>
-      <button onClick={() => handleLogOptions("Bad")}>Bad</button>
-      <button onClick={() => handleLogOptions("Reset")}>Reset</button>
-   
+      <button onClick={() => handleLogOption("Good")}>Good</button>
+      <button onClick={() => handleLogOption("Neutral")}>Neutral</button>
+      <button onClick={() => handleLogOption("Bad")}>Bad</button>
+      <button onClick={() => handleLogOption("Reset")}>Reset</button>
     </div>
   );
 };

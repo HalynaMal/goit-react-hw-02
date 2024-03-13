@@ -1,11 +1,11 @@
-const Feedback = ({handleLogFeedback}) => {
+const Feedback = ({ options }) => {
   return (
     <ul>
-      <li>Good: 0</li>
-      <li>Neutral: 0</li>
-      <li>Bad: 0</li>
-      <li>Total: 5</li>
-      <li>Positive 80%</li>
+      <li>Good: {options.good}</li>
+      <li>Neutral: {options.neutral}</li>
+      <li>Bad: {options.bad}</li>
+      <li>Total: {options.total}</li>
+      <li>Positive: {options.positive}</li>
     </ul>
   );
 };
