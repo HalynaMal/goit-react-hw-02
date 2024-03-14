@@ -1,12 +1,11 @@
-const Options = ({ handleLogOption }) => {
+const Options = ({ updateFeedback }) => {
   return (
     <div>
-      <button onClick={() => handleLogOption("Good")}>Good</button>
-      <button onClick={() => handleLogOption("Neutral")}>Neutral</button>
-      <button onClick={() => handleLogOption("Bad")}>Bad</button>
-      <button onClick={() => handleLogOption("Reset")}>Reset</button>
+      <button onClick={() => updateFeedback("good")}>Good</button>
+      <button onClick={() => updateFeedback("bad")}>Bad</button>
+      <button onClick={() => updateFeedback("neutral")}>Neutral</button>
     </div>
   );
-};
+}
 
 export default Options;

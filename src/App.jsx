@@ -1,25 +1,17 @@
 import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
 import "./App.css";
 import Feedback from "./components/Feedback/Feedback";
 import Options from "./components/Options/Options";
 
 function App() {
-// const [counter, setCounter] = useState(0);
-  const [options, setOption] = useState({ good: 0, neutral: 0, bad: 0 })
-
-    const handleLogOption = (typeOptions) => {
-      console.log("option: ", typeOptions);
-
-      setOption({...options, [typeOptions]: options[typeOptions] +1 });
+  const [feedback, setFeedback] = useState({ good: 0, bad: 0, neutral: 0 });
+  // Оголошення функції для оновлення фідбеку
+  const updateFeedback = (feedbackType) => {
+    setFeedback((prevFeedback) => ({
+      ...prevFeedback,
+      [feedbackType]: prevFeedback[feedbackType] + 1,
+    }));
   };
-
-  
-
-  // const handleIncrementCounter = () => {
-  //   setCounter(counter + 1);
-  // };
 
   return (
     <div>
@@ -29,8 +21,8 @@ function App() {
         options below.
       </h2>
 
-      <Options handleLogOption={handleLogOption} />
-      <Feedback options={options} />
+      <Options updateFeedback={updateFeedback} />
+      <Feedback feedback={feedback} />
     </div>
   );
 }
