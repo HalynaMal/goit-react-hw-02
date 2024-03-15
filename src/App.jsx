@@ -2,9 +2,11 @@ import { useState } from "react";
 import "./App.css";
 import Feedback from "./components/Feedback/Feedback";
 import Options from "./components/Options/Options";
+import Notification from "./components/Notification/Notification";
 
 function App() {
   const [feedback, setFeedback] = useState({ good: 0, bad: 0, neutral: 0 });
+  const [isVisibleNotification, setisVisibleNotification] = useState(false);
   // Оголошення функції для оновлення фідбеку
   const updateFeedback = (feedbackType) => {
     setFeedback((prevFeedback) => ({
@@ -13,6 +15,7 @@ function App() {
     }));
   };
 
+  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
   return (
     <div>
       <h1>Sip Happens Café</h1>
