@@ -1,11 +1,11 @@
-const Feedback = ({ feedback }) => {
+const Feedback = ({ feedback, totalFeedback, positiveStatistics }) => {
   return (
     <ul>
       <li>Good: {feedback.good}</li>
       <li>Neutral: {feedback.neutral}</li>
       <li>Bad: {feedback.bad}</li>
-      <li>Total: {feedback.total}</li>
-      <li>Positive: {feedback.positive}</li>
+      <li>Total: {totalFeedback}</li>
+      <li>Positive: {positiveStatistics}</li>
     </ul>
   );
 };

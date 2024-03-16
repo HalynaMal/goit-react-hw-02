@@ -1,13 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Feedback from "./components/Feedback/Feedback";
 import Options from "./components/Options/Options";
 import Notification from "./components/Notification/Notification";
+import Description from "./components/Description/Description";
 
 function App() {
-  const [feedback, setFeedback] = useState({ good: 0, bad: 0, neutral: 0 });
-  // const [isVisibleNotification, setisVisibleNotification] = useState(false);
-  // Оголошення функції для оновлення фідбеку
+  const [feedback, setFeedback] = useState(() => {
+    const savedFeedback = window.localStorage.getItem("saved-types");
+
+    if (savedFeedback) {
+      return JSON.parse(savedFeedback);
+    }
+
+    return { good: 0, bad: 0, neutral: 0 };
+  });
+
+  useEffect(() => {
+    window.localStorage.setItem("saved-types", JSON.stringify(feedback));
+  }, [feedback]);
+
   const updateFeedback = (feedbackType) => {
     setFeedback((prevFeedback) => ({
       ...prevFeedback,
@@ -16,16 +28,38 @@ function App() {
   };
 
   const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
+
+  const updateTotalFeedback = () => {
+    setFeedback({
+      good: 0,
+      neutral: 0,
+      bad: 0,
+    });
+  };
+
+  const positiveStatistics = Math.round(
+    ((feedback.good + feedback.neutral) / totalFeedback) * 100
+  );
+
   return (
     <div>
-      <h1>Sip Happens Café</h1>
-      <h2>
-        Please leave your feedback about our service by selecting one of the
-        options below.
-      </h2>
+      <Description />
 
-      <Options updateFeedback={updateFeedback} />
-      <Feedback feedback={feedback} />
+      <Options
+        updateFeedback={updateFeedback}
+        totalFeedback={totalFeedback}
+        updateTotalFeedback={updateTotalFeedback}
+      />
+
+      {totalFeedback > 0 ? (
+        <Feedback
+          feedback={feedback}
+          totalFeedback={totalFeedback}
+          positiveStatistics={positiveStatistics}
+        />
+      ) : (
+        <Notification />
+      )}
     </div>
   );
 }
